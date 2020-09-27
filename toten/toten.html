@@ -1,0 +1,148 @@
+<!DOCTYPE html><!-- Declaração -->
+<html lang="pt-br">
+<head>
+   <meta charset="utf-8">
+   <title>Toten</title>
+  <!-- Estilo --> <!-- css externo adequado para o estilo de toten a ser utilizado -->  
+   <link rel="stylesheet" type="text/css" href="estilo/style.css">
+</head>
+
+<body>
+   <section class="showcase">
+         <div class="video-container"> <!-- para colocar um video de fundo de tela -->
+            <video src="video/aviao.mp4" autoplay muted loop></video>
+         </div>
+         <div class="content">
+            <h1>AH_BORDO</h1>
+            <h3>Seja bem-vindo! Nosso principal objetivo é que você <br> tenha uma viagem inesquecível</h3>
+            <a href="../index.html" class="btn">Acesse aqui</a>
+         </div>
+      </section>
+      
+      <div>
+      <button class="butt" style="background-color: black" onClick="goFull()" id="myBut"><h4 style="color: white">Para melhor visualização<br> clique aqui</h4></button>
+   </div> 
+
+      <section id="about"> 
+         <h1>Sobre</h1>
+         <p>
+          Projeto realizado por uma equipe formada de 4 alunas de programação: Camila Machado, Carolina Souza, Emanuelle Almeida e Stefany Teles com a finalidade de conclusão do curso.
+         </p>
+
+         <h2>Nossas redes sociais</h2>
+
+          <div class="social">   <!-- Obter acesso ao twitter e ao instagram -->
+                     <a href="https://twitter.com/"><img src="../imagens/twitter.png" width="20"></a> 
+                     <a href="https://www.instagram.com/"><img src="../imagens/instagram.png" width="20"></a> 
+                     <a href="https://www.facebook.com/"><img src="../imagens/facebook.png" width="20"></a>  
+               </div>         
+      </section>
+   <script>
+   // script criado para obter a função de tela cheia //
+     var fullScreen = false;
+     
+        
+       var elem = document.body; 
+     
+     
+     var imgCount = 0;
+     var totImgs = 3;
+     
+      //criar objeto de imagem
+       var img = new Image();
+     
+     // chamar a função de desenho para exibir imagens
+       draw();
+    
+
+   function draw()
+   {
+     
+
+        img = new Image();
+     // configurar a primeira imagem a ser exibida
+       img.src = imgCount + ".jpg";
+     
+      img.onload = getSize;
+     
+       document.getElementById("myImg").src=img.src;   
+         
+  
+      }
+ 
+      var myVar = setInterval(draw, 100);
+     
+     
+   
+      function getSize(){
+          var height = img.height;
+          var width = img.width;
+          var w = window.innerWidth;
+          var h = window.innerHeight;
+      
+         
+          var adjW = w;
+          
+    
+          
+          if(adjH>h){
+              var wRatio = h/adjH;  
+              adjH = h;
+              adjW = wRatio * w;
+          }
+      
+
+         document.getElementById('myImg').height = adjH;
+         document.getElementById('myImg').width = adjW;
+     }
+     
+    
+     function goFull(){
+         
+         document.getElementById("myBut").style.visibility="hidden";
+
+         requestFullScreen(elem);
+     }
+  
+     
+     function requestFullScreen(element) {
+         
+         if(fullScreen==false){
+             fullScreen=true;
+  
+    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+
+    if (requestMethod) { 
+        requestMethod.call(element);
+    } else if (typeof window.ActiveXObject !== "undefined") { 
+        var wscript = new ActiveXObject("WScript.Shell");
+        if (wscript !== null) {
+            wscript.SendKeys("{F11}");
+        }
+    }
+     }else{
+         fullScreen=false;
+         
+         if(document.cancelFullScreen){
+          document.cancelFullScreen();
+      } else if(document.exitFullScreen){
+          document.exitFullScreen();
+      } else if(document.mozCancelFullScreen){
+          document.mozCancelFullScreen();
+      } else if(document.webkitCancelFullScreen){
+          document.webkitCancelFullScreen();
+      } else if(document.msExitFullscreen){
+          document.msExitFullscreen();
+      }
+         
+          document.getElementById("myBut").style.visibility="visible";
+         
+     }
+         
+   }
+
+//fullscreen final
+   </script>
+</body>
+</html>
+<!-- código editado e adaptado por Camila Machado -->
